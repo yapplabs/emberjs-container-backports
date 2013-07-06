@@ -1,0 +1,27 @@
+{
+  "name": "emberjs-container-backports",
+  "version": "0.0.1",
+  "description": "Backports of Ember.js' container infrastructure for Ember 1.0.0pre2",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yapplabs/emberjs-container-backports.git"
+  },
+  "author": "Yapp Labs",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "c55ac676c9aefe73367f6b881b2bfd60045032a6",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.8",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-shell": "~0.2.2",
+    "grunt-md5": "~0.1.10",
+    "grunt-contrib-uglify": "~0.2.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "matchdep": "~0.1.2",
+    "glob": "~3.2.1"
+  }
+}
