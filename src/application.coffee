@@ -11,6 +11,9 @@ ContainerSupport = Ember.Mixin.create
     @__container__ = new Container()
     @__container__.resolver = resolverFor(@)
     @__container__.normalize = Ember.String.underscore
+    @__container__.optionsForType('template',
+      instantiate: false
+    )
 
     @_super()
 

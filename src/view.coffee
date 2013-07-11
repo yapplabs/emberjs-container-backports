@@ -7,6 +7,10 @@ ContainerSupport = Ember.Mixin.create
     else
       view.container ||= @container
       @_super(view)
+  templateForName: (name, type) ->
+    return unless name
+    this.container.lookup('templates:' + name)
+
 
 ContainerSupport[Ember.GUID_KEY] = 'container_support_view'
 
