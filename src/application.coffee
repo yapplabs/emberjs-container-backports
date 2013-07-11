@@ -28,6 +28,36 @@ ContainerSupport = Ember.Mixin.create
     container = @__container__
     container.injection.apply(container, arguments)
 
+  createApplicationView: (router)->
+    rootElement = get(@, 'rootElement')
+    applicationViewOptions = {}
+    applicationViewClass = @ApplicationView
+    applicationTemplate = router.container.lookup('template:application')  # was Ember.TEMPLATES.application
+
+    # don't do anything unless there is an ApplicationView or application template
+    return if (!applicationViewClass && !applicationTemplate)
+
+    if router
+      applicationController = get(router, 'applicationController')
+      if applicationController
+        applicationViewOptions.controller = applicationController
+
+    if applicationTemplate
+      applicationViewOptions.template = applicationTemplate
+
+    if !applicationViewClass
+      applicationViewClass = Ember.View
+
+    applicationView = applicationViewClass.create(applicationViewOptions)
+
+    this._createdApplicationView = applicationView
+
+    if router
+      set(router, 'applicationView', applicationView)
+
+    applicationView.appendTo(rootElement)
+
+
 ContainerSupport[Ember.GUID_KEY] = 'container_support_application'
 
 unless ContainerSupport.detect(Ember.Application.PrototypeMixin)
