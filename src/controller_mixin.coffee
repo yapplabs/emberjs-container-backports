@@ -3,7 +3,8 @@ ContainerControllerProxy = Ember.Object.extend
     name = name.replace(/Controller$/,'')
     @container.lookup('controller:' + name)
 
-ContainerSupport = Ember.Mixin.create
+ControllerContainerSupport = Ember.Mixin.create
+  container: null
   controllers: Ember.computed ->
     ContainerControllerProxy.create
       container: @container
@@ -11,7 +12,10 @@ ContainerSupport = Ember.Mixin.create
     viewClass.create
       container: @container
 
-ContainerSupport[Ember.GUID_KEY] = 'container_support_controller_mixin'
+ControllerContainerSupport[Ember.GUID_KEY] = 'container_support_controller_mixin'
 
-unless ContainerSupport.detect(Ember.ControllerMixin.PrototypeMixin)
-  Ember.ControllerMixin.reopen(ContainerSupport)
+unless ControllerContainerSupport.detect(Ember.ControllerMixin.PrototypeMixin)
+  Ember.ControllerMixin.reopen(ControllerContainerSupport)
+
+Ember.ObjectProxy.reopen
+  _debugContainerKey: null

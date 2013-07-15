@@ -2,7 +2,7 @@ set = Ember.set
 get = Ember.get
 forEach = Ember.EnumerableUtils.forEach
 
-ContainerSupport = Ember.Mixin.create
+ViewContainerSupport = Ember.Mixin.create
   createChildView: (view, attrs)->
     if Ember.CoreView.detect(view)
       attrs ||= {}
@@ -15,9 +15,10 @@ ContainerSupport = Ember.Mixin.create
     return unless name
     this.container.lookup('template:' + name)
 
-ContainerSupport[Ember.GUID_KEY] = 'container_support_view'
+ViewContainerSupport[Ember.GUID_KEY] = 'container_support_view'
 
-Ember.View.reopen(ContainerSupport)
+Ember.View.reopen(ViewContainerSupport)
+
 Ember.ContainerView.reopen
   initializeViews: (views, parentView, templateData)->
     forEach views, (view)->

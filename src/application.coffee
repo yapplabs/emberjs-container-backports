@@ -1,5 +1,9 @@
 Container = requireModule('container')
 
+if !Ember.String.capitalize
+  Ember.String.capitalize = (str)->
+    str.charAt(0).toUpperCase() + str.substr(1)
+
 resolverFor = (namespace)->
   resolverClass = namespace.get('resolver') || Ember.DefaultResolver;
   resolver = resolverClass.create
@@ -28,6 +32,17 @@ ContainerSupport = Ember.Mixin.create
     container = @__container__
     container.injection.apply(container, arguments)
 
+  setupRouter: (router)->
+    if !router && Ember.Router.detect(@Router)
+      router = @__container__.lookup('router:main')
+      @_createdRouter = router
+
+    if router
+      set(@, 'router', router)
+      set(router, 'namespace', @)
+
+    router
+
   createApplicationView: (router)->
     rootElement = get(@, 'rootElement')
     applicationViewOptions = {}
@@ -38,7 +53,7 @@ ContainerSupport = Ember.Mixin.create
     return if (!applicationViewClass && !applicationTemplate)
 
     if router
-      applicationController = get(router, 'applicationController')
+      applicationController = router.container.lookup('controller:application')
       if applicationController
         applicationViewOptions.controller = applicationController
 
