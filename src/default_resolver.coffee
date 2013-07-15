@@ -7,6 +7,10 @@ classify = Ember.String.classify
 capitalize = Ember.String.capitalize
 decamelize = Ember.String.decamelize
 
+Ember.Namespace.reopenClass
+  byName: (name)->
+    @NAMESPACES.findProperty(Ember.GUID_KEY + '_name', name)
+
 Ember.DefaultResolver ?= Ember.Object.extend(
   namespace: null
 
