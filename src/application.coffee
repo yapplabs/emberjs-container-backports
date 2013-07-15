@@ -1,9 +1,5 @@
 Container = requireModule('container')
 
-if !Ember.String.capitalize
-  Ember.String.capitalize = (str)->
-    str.charAt(0).toUpperCase() + str.substr(1)
-
 resolverFor = (namespace)->
   resolverClass = namespace.get('resolver') || Ember.DefaultResolver;
   resolver = resolverClass.create

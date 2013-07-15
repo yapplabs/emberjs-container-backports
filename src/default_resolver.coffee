@@ -1,3 +1,7 @@
+if !Ember.String.capitalize
+  Ember.String.capitalize = (str)->
+    str.charAt(0).toUpperCase() + str.substr(1)
+
 get = Ember.get
 classify = Ember.String.classify
 capitalize = Ember.String.capitalize
