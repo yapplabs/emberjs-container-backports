@@ -29,13 +29,14 @@ ContainerSupport = Ember.Mixin.create
     container.injection.apply(container, arguments)
 
   setupRouter: (router)->
-    if !router && Ember.Router.detect(@Router)
+    if !router
       router = @__container__.lookup('router:main')
       @_createdRouter = router
 
     if router
       set(@, 'router', router)
       set(router, 'namespace', @)
+      router.container = @__container__
 
     router
 
