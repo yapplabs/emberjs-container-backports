@@ -23,7 +23,7 @@ Ember.ContainerView.reopen
   initializeViews: (views, parentView, templateData)->
     forEach views, (view)->
       set(view, '_parentView', parentView)
-      set(view, 'container', parentView && parentView.container)
-
+      if (parentView && parentView.container)
+        set(view, 'container', parentView && parentView.container)
       unless get(view, 'templateData')
         set(view, 'templateData', templateData)
