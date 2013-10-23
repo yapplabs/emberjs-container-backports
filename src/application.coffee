@@ -50,6 +50,7 @@ ContainerSupport = Ember.Mixin.create
     return if (!applicationViewClass && !applicationTemplate)
 
     if router
+      applicationViewOptions.container = router.container
       applicationController = router.container.lookup('controller:application')
       if applicationController
         applicationViewOptions.controller = applicationController
