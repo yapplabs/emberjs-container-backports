@@ -44,14 +44,15 @@ ContainerSupport = Ember.Mixin.create
     rootElement = get(@, 'rootElement')
     applicationViewOptions = {}
     applicationViewClass = @ApplicationView
-    applicationTemplate = router.container.lookup('template:application')  # was Ember.TEMPLATES.application
+    container = router.container
+    applicationTemplate = container.lookup('template:application')  # was Ember.TEMPLATES.application
 
     # don't do anything unless there is an ApplicationView or application template
     return if (!applicationViewClass && !applicationTemplate)
 
     if router
-      applicationViewOptions.container = router.container
-      applicationController = router.container.lookup('controller:application')
+      applicationViewOptions.container = container
+      applicationController = container.lookup('controller:application')
       if applicationController
         applicationViewOptions.controller = applicationController
 
@@ -61,7 +62,10 @@ ContainerSupport = Ember.Mixin.create
     if !applicationViewClass
       applicationViewClass = Ember.View
 
-    applicationView = applicationViewClass.create(applicationViewOptions)
+      container.register('view:application', applicationViewClass)
+
+    applicationView = container.lookup('view:application')
+    applicationView.setProperties(applicationViewOptions)
 
     this._createdApplicationView = applicationView
 
